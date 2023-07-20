@@ -17,4 +17,4 @@
 
 ### System design
 
-![System design](/design%20system.drawio.png "System design")
+[![System design](/design%20system.drawio.png "Shiprock, New Mexico by Beau Rogers")](https://drive.google.com/file/d/1vNR-I4MNIf5wHrv44bl-4YKe4lSXXBZ6/view?usp=sharing)
