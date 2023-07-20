@@ -13,7 +13,7 @@
 
 - Về server và DB: các nội dung tĩnh về bài báo như html, text có thể store ở DB, còn image thì store trên s3 và ở DB store path của image, khi call api get 1 bài báo, server sẽ trả text hoặc html, kèm theo là image key trên s3 cho client hoặc link tới image bằng domain của Cloudfront
 - Về FE: khi có được text hoặc html kèm theo key của image, sử dụng domain Cloudfront để get image từ s3 và hiển thị trên FE, hoặc hiển thị luôn image bằng link qua domain Cloudfront nhận đc từ BE.
-- Về CDN: sử dụng Cloudfront để get image từ s3 cho user toàn cầu, giảm độ trễ về khác region và sử dụng cloudfront cho server để cache response cho user ở nhiều nơi trên thế giới, giúp giảm độ trễ.
+- Về CDN: sử dụng Cloudfront để get image từ s3 cho user toàn cầu, giảm độ trễ về khác region và sử dụng cloudfront cho server để cache response cho client ở nhiều nơi trên thế giới, giúp giảm độ trễ.
 
 ### System design
 
