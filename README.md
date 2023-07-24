@@ -15,6 +15,20 @@
 - Về FE: khi có được text hoặc html kèm theo key của image, sử dụng domain Cloudfront để get image từ s3 và hiển thị trên FE, hoặc hiển thị luôn image bằng link qua domain Cloudfront nhận đc từ BE.
 - Về CDN: sử dụng Cloudfront để get image từ s3 cho user toàn cầu, giảm độ trễ về khác region và sử dụng cloudfront cho server để cache response cho client ở nhiều nơi trên thế giới, giúp giảm độ trễ.
 
+### Update
+
+- Không cần sử dụng Cloudfront để cache cho api, để xử lý chịu tải cao, ta sử dụng LB và cache ở redis databse và dùng cơ chế CDC để instance không tác động trực tiếp vào DB mà phải qua CDC để cache và lấy data
+
 ### System design
 
-[![System design](/design-system.jpg "System design")](https://drive.google.com/file/d/1vNR-I4MNIf5wHrv44bl-4YKe4lSXXBZ6/view?usp=sharing)
+[![System design](/design%20system.jpg "System design")](https://drive.google.com/file/d/1vNR-I4MNIf5wHrv44bl-4YKe4lSXXBZ6/view?usp=sharing)
+
+### Tìm hiểu về các thành phần của hệ thống
+
+- Load Balancer: như trên AWS ta có ALB,
+
+- CDC(Binlog - Debezium)
+
+- Cloudfront(CDN)
+
+- Kafka
