@@ -21,11 +21,15 @@
 
 ### System design
 
-[![System design](/design%20system.jpg "System design")](https://drive.google.com/file/d/1vNR-I4MNIf5wHrv44bl-4YKe4lSXXBZ6/view?usp=sharing)
+[![System design](/abc.jpg "System design")](https://drive.google.com/file/d/1vNR-I4MNIf5wHrv44bl-4YKe4lSXXBZ6/view?usp=sharing)
 
 ### Tìm hiểu về các thành phần của hệ thống
 
-- Load Balancer: như trên AWS ta có ALB,
+- Load Balancer:
+
+  - Có nhiệm vụ cần bằng tải cho hệ thống gồm nhiều server/cụm server để đáp ứng được lượng request lên tới hàng triệu trong 1 khoảng thời gian ngắn 1 cách hiệu quả.
+  - Routing các request đến các server có khả năng xử lý các request đó sao cho tối ưu nhất về tốc độ, hiệu suất và đảm bảo không có server nào họat động quá tải.
+  - Yêu cầu trong design system:
 
 - CDC(Binlog - Debezium)
 
