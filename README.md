@@ -23,16 +23,20 @@
 
 [![System design](/abc.jpg "System design")](https://drive.google.com/file/d/1vNR-I4MNIf5wHrv44bl-4YKe4lSXXBZ6/view?usp=sharing)
 
-### Tìm hiểu về các thành phần của hệ thống
+### Các thành phần trong hệ thống
 
-- Load Balancer:
+- Cloudfront(CDN): Sau khi đã có các nội dung tĩnh trên S3 như image của 1 bài báo, ta cấu hình CDN Cloudfront để có thể dễ dàng lấy casci data tĩnh như image từ nhiều client từ trên nhiều region, mà với tốc độ tối ưu, giảm độ trễ, chịu được tải cao.
+- Load Balancer: Để hệ thống chịu được lượng tải cao, ta cần 1 Load Balancer làm nhiệm vụ load balancing, tối ưu việc routing request của client về instance có response time thấp nhất, ít bị delay nhất theo 1 số thuật toán.
+- Kafka service: Xử lý event từ instance và từ worker để instance có thể biết lấy data từ Redis hoặc chờ để lấy lại data từ cache
+- Binlog - Debezium: Xử lý bắn event cho kafka khi đã lấy data và cache, từ đó instance có thể lấy data từ cache.
 
-  - Có nhiệm vụ cần bằng tải cho hệ thống gồm nhiều server/cụm server để đáp ứng được lượng request lên tới hàng triệu trong 1 khoảng thời gian ngắn 1 cách hiệu quả.
-  - Routing các request đến các server có khả năng xử lý các request đó sao cho tối ưu nhất về tốc độ, hiệu suất và đảm bảo không có server nào họat động quá tải.
-  - Yêu cầu trong design system:
+### System design basic:
 
-- CDC(Binlog - Debezium)
+[![System design](/sys-basic.png "System design")](https://drive.google.com/file/d/1vNR-I4MNIf5wHrv44bl-4YKe4lSXXBZ6/view?usp=sharing)
 
-- Cloudfront(CDN)
+### Các bước triển khai hệ thống basic:
 
-- Kafka
+- Bước 1: Thiết lập Cloudfront(CDN) trên AWS, sau đó trỏ CDN vào S3 để có thể phân tán nội dung trong s3 ở trên nhiều region, tối ưu, có độ trễ thấp nhờ nguyên lý cache của Cloudfront. Tạo S3 với các permission cho Cloudfront.
+- Bước 2: Thiết lập instance với ngôn ngữ PHP, bao gồm DB là mysql, cache DB là Redis.
+- Bước 3: Thiết lập logic get 1 bài báo và post 1 bài báo trên instance, kết hợp cache trên Redis và lấy data từ DB.
+- Bước 4: Thiết lập domain trên Cloudflare, trỏ vào IP của instance.
