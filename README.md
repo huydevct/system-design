@@ -40,3 +40,5 @@
 - Bước 2: Thiết lập instance với ngôn ngữ PHP, bao gồm DB là mysql, cache DB là Redis.
 - Bước 3: Thiết lập logic get 1 bài báo và post 1 bài báo trên instance, kết hợp cache trên Redis và lấy data từ DB.
 - Bước 4: Thiết lập domain trên Cloudflare, trỏ vào IP của instance.
+
+### [Github BE của system design basic](https://github.com/huydevct/system-design-be)
